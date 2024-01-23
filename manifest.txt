@@ -1,0 +1,26 @@
+{
+  "manifest": [
+    {
+      "file": "./files/diff",
+      "md5": "77cfa29e672891024ac25bf510b046df",
+      "url": "https://www.virustotal.com/gui/search/77cfa29e672891024ac25bf510b046df",
+      "validated": true,
+      "epoch": 1706009111
+    },
+    {
+      "file": "./files/json_pp",
+      "md5": "e983f421d46acf06deadc5390e8a6355",
+      "url": "https://www.virustotal.com/gui/search/e983f421d46acf06deadc5390e8a6355",
+      "validated": true,
+      "epoch": 1706009111
+    },
+    {
+      "file": "./files/perl",
+      "md5": "efd0079f088052364f5b36fd5da60bf0",
+      "url": "https://www.virustotal.com/gui/search/efd0079f088052364f5b36fd5da60bf0",
+      "validated": true,
+      "epoch": 1706009113
+    }
+  ],
+  "num_files": 3
+}
