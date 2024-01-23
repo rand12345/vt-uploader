@@ -1,16 +1,15 @@
 [package]
 name = "virustotal-uploader"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-base64 = "0.2"
+base64 = "0.21.7"
 chksum-md5 = "0.0.0"
 glob = "0.3.1"
 serde = "1.0.195"
 serde_json = "1.0.111"
 structopt = "0.3.26"
 vt3 = "0.7.2"
-
