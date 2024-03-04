@@ -67,9 +67,14 @@ fn main() -> LazyResult<()> {
 fn hash(vt: &VtClient, hash: Option<&String>) -> VtResult<()> {
     let res = vt.file_info(hash.unwrap())?;
     let data = res.data.unwrap().attributes.unwrap();
-    // println!("{:#?}", data);
-    let last = data.last_analysis_stats.unwrap();
-    println!("{:#?}", &last);
+
+    println!("{:#?}", &data.last_analysis_stats.unwrap());
+    for (_s, item) in data.last_analysis_results.unwrap() {
+        if Some("malicious".to_string()) == item.category {
+            println!("{} {}", item.engine_name.unwrap(), item.result.unwrap());
+        }
+    }
+    println!("File name(s): {:?}", data.names.unwrap());
     Ok(())
 }
 fn manifest(vt: &VtClient, manifest_file: &str) -> LazyResult<()> {
