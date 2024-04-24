@@ -1,0 +1,10 @@
+/Users/dgau/git_temp/vt-uploader/docs/debug/deps/libstructopt_derive-212e4b49ade87697.dylib: /Users/dgau/.cargo/registry/src/index.crates.io-6f17d22bba15001f/structopt-derive-0.4.18/src/lib.rs /Users/dgau/.cargo/registry/src/index.crates.io-6f17d22bba15001f/structopt-derive-0.4.18/src/attrs.rs /Users/dgau/.cargo/registry/src/index.crates.io-6f17d22bba15001f/structopt-derive-0.4.18/src/doc_comments.rs /Users/dgau/.cargo/registry/src/index.crates.io-6f17d22bba15001f/structopt-derive-0.4.18/src/parse.rs /Users/dgau/.cargo/registry/src/index.crates.io-6f17d22bba15001f/structopt-derive-0.4.18/src/spanned.rs /Users/dgau/.cargo/registry/src/index.crates.io-6f17d22bba15001f/structopt-derive-0.4.18/src/ty.rs
+
+/Users/dgau/git_temp/vt-uploader/docs/debug/deps/structopt_derive-212e4b49ade87697.d: /Users/dgau/.cargo/registry/src/index.crates.io-6f17d22bba15001f/structopt-derive-0.4.18/src/lib.rs /Users/dgau/.cargo/registry/src/index.crates.io-6f17d22bba15001f/structopt-derive-0.4.18/src/attrs.rs /Users/dgau/.cargo/registry/src/index.crates.io-6f17d22bba15001f/structopt-derive-0.4.18/src/doc_comments.rs /Users/dgau/.cargo/registry/src/index.crates.io-6f17d22bba15001f/structopt-derive-0.4.18/src/parse.rs /Users/dgau/.cargo/registry/src/index.crates.io-6f17d22bba15001f/structopt-derive-0.4.18/src/spanned.rs /Users/dgau/.cargo/registry/src/index.crates.io-6f17d22bba15001f/structopt-derive-0.4.18/src/ty.rs
+
+/Users/dgau/.cargo/registry/src/index.crates.io-6f17d22bba15001f/structopt-derive-0.4.18/src/lib.rs:
+/Users/dgau/.cargo/registry/src/index.crates.io-6f17d22bba15001f/structopt-derive-0.4.18/src/attrs.rs:
+/Users/dgau/.cargo/registry/src/index.crates.io-6f17d22bba15001f/structopt-derive-0.4.18/src/doc_comments.rs:
+/Users/dgau/.cargo/registry/src/index.crates.io-6f17d22bba15001f/structopt-derive-0.4.18/src/parse.rs:
+/Users/dgau/.cargo/registry/src/index.crates.io-6f17d22bba15001f/structopt-derive-0.4.18/src/spanned.rs:
+/Users/dgau/.cargo/registry/src/index.crates.io-6f17d22bba15001f/structopt-derive-0.4.18/src/ty.rs:

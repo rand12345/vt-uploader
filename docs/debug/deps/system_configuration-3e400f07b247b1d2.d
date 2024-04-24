@@ -1,0 +1,9 @@
+/Users/dgau/git_temp/vt-uploader/docs/debug/deps/libsystem_configuration-3e400f07b247b1d2.rmeta: /Users/dgau/.cargo/registry/src/index.crates.io-6f17d22bba15001f/system-configuration-0.5.1/src/lib.rs /Users/dgau/.cargo/registry/src/index.crates.io-6f17d22bba15001f/system-configuration-0.5.1/src/dynamic_store.rs /Users/dgau/.cargo/registry/src/index.crates.io-6f17d22bba15001f/system-configuration-0.5.1/src/network_configuration.rs /Users/dgau/.cargo/registry/src/index.crates.io-6f17d22bba15001f/system-configuration-0.5.1/src/network_reachability.rs /Users/dgau/.cargo/registry/src/index.crates.io-6f17d22bba15001f/system-configuration-0.5.1/src/preferences.rs
+
+/Users/dgau/git_temp/vt-uploader/docs/debug/deps/system_configuration-3e400f07b247b1d2.d: /Users/dgau/.cargo/registry/src/index.crates.io-6f17d22bba15001f/system-configuration-0.5.1/src/lib.rs /Users/dgau/.cargo/registry/src/index.crates.io-6f17d22bba15001f/system-configuration-0.5.1/src/dynamic_store.rs /Users/dgau/.cargo/registry/src/index.crates.io-6f17d22bba15001f/system-configuration-0.5.1/src/network_configuration.rs /Users/dgau/.cargo/registry/src/index.crates.io-6f17d22bba15001f/system-configuration-0.5.1/src/network_reachability.rs /Users/dgau/.cargo/registry/src/index.crates.io-6f17d22bba15001f/system-configuration-0.5.1/src/preferences.rs
+
+/Users/dgau/.cargo/registry/src/index.crates.io-6f17d22bba15001f/system-configuration-0.5.1/src/lib.rs:
+/Users/dgau/.cargo/registry/src/index.crates.io-6f17d22bba15001f/system-configuration-0.5.1/src/dynamic_store.rs:
+/Users/dgau/.cargo/registry/src/index.crates.io-6f17d22bba15001f/system-configuration-0.5.1/src/network_configuration.rs:
+/Users/dgau/.cargo/registry/src/index.crates.io-6f17d22bba15001f/system-configuration-0.5.1/src/network_reachability.rs:
+/Users/dgau/.cargo/registry/src/index.crates.io-6f17d22bba15001f/system-configuration-0.5.1/src/preferences.rs:

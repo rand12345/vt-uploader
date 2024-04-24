@@ -1,0 +1,11 @@
+/Users/dgau/git_temp/vt-uploader/docs/debug/deps/libfutures_task-42609fa153de3885.rmeta: /Users/dgau/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-task-0.3.30/src/lib.rs /Users/dgau/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-task-0.3.30/src/spawn.rs /Users/dgau/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-task-0.3.30/src/arc_wake.rs /Users/dgau/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-task-0.3.30/src/waker.rs /Users/dgau/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-task-0.3.30/src/waker_ref.rs /Users/dgau/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-task-0.3.30/src/future_obj.rs /Users/dgau/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-task-0.3.30/src/noop_waker.rs
+
+/Users/dgau/git_temp/vt-uploader/docs/debug/deps/futures_task-42609fa153de3885.d: /Users/dgau/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-task-0.3.30/src/lib.rs /Users/dgau/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-task-0.3.30/src/spawn.rs /Users/dgau/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-task-0.3.30/src/arc_wake.rs /Users/dgau/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-task-0.3.30/src/waker.rs /Users/dgau/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-task-0.3.30/src/waker_ref.rs /Users/dgau/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-task-0.3.30/src/future_obj.rs /Users/dgau/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-task-0.3.30/src/noop_waker.rs
+
+/Users/dgau/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-task-0.3.30/src/lib.rs:
+/Users/dgau/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-task-0.3.30/src/spawn.rs:
+/Users/dgau/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-task-0.3.30/src/arc_wake.rs:
+/Users/dgau/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-task-0.3.30/src/waker.rs:
+/Users/dgau/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-task-0.3.30/src/waker_ref.rs:
+/Users/dgau/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-task-0.3.30/src/future_obj.rs:
+/Users/dgau/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-task-0.3.30/src/noop_waker.rs:
