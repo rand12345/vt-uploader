@@ -1,0 +1,131 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="This crate provides an implementation of the MD5 hash function with a straightforward interface for computing digests of bytes, files, directories, and more."><title>chksum_md5 - Rust</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../static.files/rustdoc-9ee3a5e31a2afa3e.css"><meta name="rustdoc-vars" data-root-path="../" data-static-root-path="../static.files/" data-current-crate="chksum_md5" data-themes="" data-resource-suffix="" data-rustdoc-version="1.75.0 (82e1608df 2023-12-21)" data-channel="1.75.0" data-search-js="search-8fbf244ebcf71464.js" data-settings-js="settings-74424d7eec62a23e.js" ><script src="../static.files/storage-fec3eaa3851e447d.js"></script><script defer src="../crates.js"></script><script defer src="../static.files/main-9dd44ab47b99a0fb.js"></script><noscript><link rel="stylesheet" href="../static.files/noscript-5d8b3c7633ad77ba.css"></noscript><link rel="alternate icon" type="image/png" href="../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc mod crate"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button></nav><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../chksum_md5/index.html">chksum_md5</a><span class="version">0.0.0</span></h2></div><div class="sidebar-elems"><ul class="block">
+            <li><a id="all-types" href="all.html">All Items</a></li></ul><section><ul class="block"><li><a href="#reexports">Re-exports</a></li><li><a href="#structs">Structs</a></li><li><a href="#functions">Functions</a></li></ul></section></div></nav><main><div class="width-limiter"><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="main-heading"><h1>Crate <a class="mod" href="#">chksum_md5</a><button id="copy-path" title="Copy item path to clipboard"><img src="../static.files/clipboard-7571035ce49a181d.svg" width="19" height="18" alt="Copy item path"></button></h1><span class="out-of-band"><a class="src" href="../src/chksum_md5/lib.rs.html#1-597">source</a> · <button id="toggle-all-docs" title="collapse all docs">[<span>&#x2212;</span>]</button></span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>This crate provides an implementation of the MD5 hash function with a straightforward interface for computing digests of bytes, files, directories, and more.</p>
+<p>For a low-level interface, you can explore the <a href="../chksum_hash_md5/index.html" title="mod chksum_hash_md5"><code>chksum_hash_md5</code></a> crate.</p>
+<h2 id="setup"><a href="#setup">Setup</a></h2>
+<p>To use this crate, add the following entry to your <code>Cargo.toml</code> file in the <code>dependencies</code> section:</p>
+<div class="example-wrap"><pre class="language-toml"><code>[dependencies]
+chksum-md5 = &quot;0.0.0&quot;
+</code></pre></div>
+<p>Alternatively, you can use the <a href="https://doc.rust-lang.org/cargo/commands/cargo-add.html"><code>cargo add</code></a> subcommand:</p>
+<div class="example-wrap"><pre class="language-sh"><code>cargo add chksum-md5
+</code></pre></div><h2 id="usage"><a href="#usage">Usage</a></h2>
+<p>Use the <a href="fn.chksum.html" title="fn chksum_md5::chksum"><code>chksum</code></a> function to calcualate digest of file, directory and so on.</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>std::fs::File;
+
+<span class="kw">use </span>chksum_md5 <span class="kw">as </span>md5;
+
+<span class="kw">let </span>file = File::open(path)<span class="question-mark">?</span>;
+<span class="kw">let </span>digest = md5::chksum(file)<span class="question-mark">?</span>;
+<span class="macro">assert_eq!</span>(
+    digest.to_hex_lowercase(),
+    <span class="string">&quot;5c71dbb287630d65ca93764c34d9aa0d&quot;
+</span>);</code></pre></div>
+<h2 id="input-types"><a href="#input-types">Input Types</a></h2><h3 id="bytes"><a href="#bytes">Bytes</a></h3><h4 id="array"><a href="#array">Array</a></h4>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>chksum_md5 <span class="kw">as </span>md5;
+
+<span class="kw">let </span>data = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];
+<span class="kw">let </span>digest = md5::chksum(data)<span class="question-mark">?</span>;
+<span class="macro">assert_eq!</span>(
+    digest.to_hex_lowercase(),
+    <span class="string">&quot;5c71dbb287630d65ca93764c34d9aa0d&quot;
+</span>);</code></pre></div>
+<h4 id="vec"><a href="#vec">Vec</a></h4>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>chksum_md5 <span class="kw">as </span>md5;
+
+<span class="kw">let </span>data = <span class="macro">vec!</span>[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];
+<span class="kw">let </span>digest = md5::chksum(data)<span class="question-mark">?</span>;
+<span class="macro">assert_eq!</span>(
+    digest.to_hex_lowercase(),
+    <span class="string">&quot;5c71dbb287630d65ca93764c34d9aa0d&quot;
+</span>);</code></pre></div>
+<h4 id="slice"><a href="#slice">Slice</a></h4>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>chksum_md5 <span class="kw">as </span>md5;
+
+<span class="kw">let </span>data = <span class="kw-2">&amp;</span>[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];
+<span class="kw">let </span>digest = md5::chksum(data)<span class="question-mark">?</span>;
+<span class="macro">assert_eq!</span>(
+    digest.to_hex_lowercase(),
+    <span class="string">&quot;5c71dbb287630d65ca93764c34d9aa0d&quot;
+</span>);</code></pre></div>
+<h3 id="strings"><a href="#strings">Strings</a></h3><h4 id="str"><a href="#str">str</a></h4>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>chksum_md5 <span class="kw">as </span>md5;
+
+<span class="kw">let </span>data = <span class="string">&quot;&amp;str&quot;</span>;
+<span class="kw">let </span>digest = md5::chksum(data)<span class="question-mark">?</span>;
+<span class="macro">assert_eq!</span>(
+    digest.to_hex_lowercase(),
+    <span class="string">&quot;5c71dbb287630d65ca93764c34d9aa0d&quot;
+</span>);</code></pre></div>
+<h4 id="string"><a href="#string">String</a></h4>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>chksum_md5 <span class="kw">as </span>md5;
+
+<span class="kw">let </span>data = String::from(<span class="string">&quot;String&quot;</span>);
+<span class="kw">let </span>digest = md5::chksum(data)<span class="question-mark">?</span>;
+<span class="macro">assert_eq!</span>(
+    digest.to_hex_lowercase(),
+    <span class="string">&quot;5c71dbb287630d65ca93764c34d9aa0d&quot;
+</span>);</code></pre></div>
+<h3 id="file"><a href="#file">File</a></h3>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>std::fs::File;
+
+<span class="kw">use </span>chksum_md5 <span class="kw">as </span>md5;
+
+<span class="kw">let </span>file = File::open(path)<span class="question-mark">?</span>;
+<span class="kw">let </span>digest = md5::chksum(file)<span class="question-mark">?</span>;
+<span class="macro">assert_eq!</span>(
+    digest.to_hex_lowercase(),
+    <span class="string">&quot;5c71dbb287630d65ca93764c34d9aa0d&quot;
+</span>);</code></pre></div>
+<h3 id="directory"><a href="#directory">Directory</a></h3>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>std::fs::read_dir;
+
+<span class="kw">use </span>chksum_md5 <span class="kw">as </span>md5;
+
+<span class="kw">let </span>readdir = read_dir(path)<span class="question-mark">?</span>;
+<span class="kw">let </span>digest = md5::chksum(readdir)<span class="question-mark">?</span>;
+<span class="macro">assert_eq!</span>(
+    digest.to_hex_lowercase(),
+    <span class="string">&quot;5c71dbb287630d65ca93764c34d9aa0d&quot;
+</span>);</code></pre></div>
+<h3 id="path"><a href="#path">Path</a></h3>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>std::path::PathBuf;
+
+<span class="kw">use </span>chksum_md5 <span class="kw">as </span>md5;
+
+<span class="kw">let </span>path = PathBuf::from(path);
+<span class="kw">let </span>digest = md5::chksum(path)<span class="question-mark">?</span>;
+<span class="macro">assert_eq!</span>(
+    digest.to_hex_lowercase(),
+    <span class="string">&quot;5c71dbb287630d65ca93764c34d9aa0d&quot;
+</span>);</code></pre></div>
+<h3 id="standard-input"><a href="#standard-input">Standard Input</a></h3>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>std::io::stdin;
+
+<span class="kw">use </span>chksum_md5 <span class="kw">as </span>md5;
+
+<span class="kw">let </span>stdin = stdin();
+<span class="kw">let </span>digest = md5::chksum(stdin)<span class="question-mark">?</span>;
+<span class="macro">assert_eq!</span>(
+    digest.to_hex_lowercase(),
+    <span class="string">&quot;5c71dbb287630d65ca93764c34d9aa0d&quot;
+</span>);</code></pre></div>
+<h2 id="features"><a href="#features">Features</a></h2>
+<p>Cargo features are utilized to enable extra options.</p>
+<ul>
+<li><code>reader</code> enables the [<code>reader</code>] module with the [<code>Reader</code>] struct.</li>
+<li><code>writer</code> enables the [<code>writer</code>] module with the [<code>Writer</code>] struct.</li>
+</ul>
+<p>By default, neither of these features is enabled.</p>
+<p>To customize your setup, disable the default features and enable only those that you need in your <code>Cargo.toml</code> file:</p>
+<div class="example-wrap"><pre class="language-toml"><code>[dependencies]
+chksum-md5 = { version = &quot;0.0.0&quot;, features = [&quot;reader&quot;, &quot;writer&quot;] }
+</code></pre></div>
+<p>Alternatively, you can use the <a href="https://doc.rust-lang.org/cargo/commands/cargo-add.html"><code>cargo add</code></a> subcommand:</p>
+<div class="example-wrap"><pre class="language-shell"><code>cargo add chksum-md5 --features reader,writer
+</code></pre></div><h2 id="disclaimer"><a href="#disclaimer">Disclaimer</a></h2>
+<p>The MD5 hash function should be used only for backward compatibility due to security issues.</p>
+<p>Check <a href="https://www.rfc-editor.org/rfc/rfc6151">RFC 6151: Updated Security Considerations for the MD5 Message-Digest and the HMAC-MD5 Algorithms</a> for more details.</p>
+<h2 id="license"><a href="#license">License</a></h2>
+<p>This crate is licensed under the MIT License.</p>
+</div></details><h2 id="reexports" class="small-section-header"><a href="#reexports">Re-exports</a></h2><ul class="item-table"><li><div class="item-name" id="reexport.Chksumable"><code>pub use chksum_core::<a class="trait" href="../chksum_core/trait.Chksumable.html" title="trait chksum_core::Chksumable">Chksumable</a>;</code></div></li><li><div class="item-name" id="reexport.Error"><code>pub use chksum_core::<a class="enum" href="../chksum_core/error/enum.Error.html" title="enum chksum_core::error::Error">Error</a>;</code></div></li><li><div class="item-name" id="reexport.Hash"><code>pub use chksum_core::<a class="trait" href="../chksum_core/trait.Hash.html" title="trait chksum_core::Hash">Hash</a>;</code></div></li><li><div class="item-name" id="reexport.Hashable"><code>pub use chksum_core::<a class="trait" href="../chksum_core/trait.Hashable.html" title="trait chksum_core::Hashable">Hashable</a>;</code></div></li><li><div class="item-name" id="reexport.Result"><code>pub use chksum_core::<a class="type" href="../chksum_core/error/type.Result.html" title="type chksum_core::error::Result">Result</a>;</code></div></li><li><div class="item-name" id="reexport.hash"><code>pub use <a class="mod" href="../chksum_hash_md5/index.html" title="mod chksum_hash_md5">chksum_hash_md5</a> as hash;</code></div></li></ul><h2 id="structs" class="small-section-header"><a href="#structs">Structs</a></h2><ul class="item-table"><li><div class="item-name"><a class="struct" href="struct.Digest.html" title="struct chksum_md5::Digest">Digest</a></div><div class="desc docblock-short">A hash digest.</div></li><li><div class="item-name"><a class="struct" href="struct.MD5.html" title="struct chksum_md5::MD5">MD5</a></div><div class="desc docblock-short">The MD5 hash instance.</div></li></ul><h2 id="functions" class="small-section-header"><a href="#functions">Functions</a></h2><ul class="item-table"><li><div class="item-name"><a class="fn" href="fn.chksum.html" title="fn chksum_md5::chksum">chksum</a></div><div class="desc docblock-short">Computes the hash of the given input.</div></li><li><div class="item-name"><a class="fn" href="fn.default.html" title="fn chksum_md5::default">default</a></div><div class="desc docblock-short">Creates a default hash.</div></li><li><div class="item-name"><a class="fn" href="fn.hash.html" title="fn chksum_md5::hash">hash</a></div><div class="desc docblock-short">Computes the hash of the given input.</div></li><li><div class="item-name"><a class="fn" href="fn.new.html" title="fn chksum_md5::new">new</a></div><div class="desc docblock-short">Creates a new hash.</div></li></ul></section></div></main></body></html>

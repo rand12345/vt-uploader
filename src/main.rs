@@ -1,25 +1,66 @@
-//! Basic VirusTotal CLI tool
+//!  VirusTotal CLI tool
 //!
 //!
 //!
+
 mod file;
-// mod hash;
+mod hash;
 mod models;
-
 use file::*;
-use std::fs::File;
-
+use hash::*;
 use structopt::StructOpt;
-use vt3::*;
 
-use crate::models::{CsvWithFileName, Manifest};
+use vt3::*;
 
 const BASE_URL: &str = "https://www.virustotal.com/gui/search/";
 const FILE_OUTPUT: &str = "manifest.txt";
+type LazyResult<T> = Result<T, Box<dyn std::error::Error>>;
 
-#[derive(StructOpt)]
-struct CommandLineArgs {
-    /// Choose the action to perform (file, hash, rescan)
+/// Entry point of the program.
+///
+/// This function serves as the entry point of the program. It parses command-line arguments
+/// using the `CommandLineArgs::from_args()` function provided by `structopt`. It also retrieves
+/// the VirusTotal API key from the environment variable `api_key`.
+///
+/// After parsing the command-line arguments and retrieving the API key, it initializes a `VtClient`
+/// instance using the API key and sets the user agent to "Chrome".
+///
+/// Depending on the action specified in the command-line arguments, it calls one of the following
+/// functions:
+///
+/// * `file_proc`: Processes files if the action is `Actions::File`.
+/// * `hash`: Retrieves and prints analysis results for a file hash if the action is `Actions::Hash`.
+/// * `csv`: Converts a file manifest into CSV malware detection data if the action is `Actions::Csv`.
+///
+/// # Errors
+///
+/// This function returns a `LazyResult` which is an alias for `Result<(), LazyError>`.
+/// It may return an error if any of the called functions encounters an error.
+///
+/// # Panics
+///
+/// This function panics if the VirusTotal API key is not exported to the environment variable `api_key`.
+///
+fn main() -> LazyResult<()> {
+    // Parse command-line arguments
+    let args = CommandLineArgs::from_args();
+    // Retrieve the VirusTotal API key from the environment variable
+    let api_key = std::env::var("api_key").expect("Export the VirusTotal api key to [env] api_key");
+    // Initialize a VtClient instance with the retrieved API key and set the user agent
+    let vt = VtClient::new(&api_key).user_agent("Chrome");
+
+    // Match the action specified in the command-line arguments and call the corresponding function
+    match args.action {
+        Actions::File => file_proc(&vt, args.file_or_hash)?,
+        Actions::Hash => hash(&vt, args.file_or_hash.first())?,
+        Actions::Csv => csv(&vt, args.file_or_hash.first().unwrap())?,
+    };
+    Ok(())
+}
+
+#[derive(structopt::StructOpt)]
+pub struct CommandLineArgs {
+    /// Choose the action to perform (file, hash, or csv)
     action: Actions,
 
     /// The file, glob, or hash to operate on
@@ -28,12 +69,18 @@ struct CommandLineArgs {
 
 #[derive(StructOpt)]
 #[structopt(rename_all = "lowercase")]
-enum Actions {
+pub enum Actions {
     File,
     Hash,
-    Rescan,
-    Manifest,
+    Csv,
 }
+
+impl Actions {
+    fn variants() -> &'static &'static str {
+        &"file <filename>, hash <hash value>, csv <manifest>, help"
+    }
+}
+
 impl std::str::FromStr for Actions {
     type Err = String;
 
@@ -41,78 +88,12 @@ impl std::str::FromStr for Actions {
         match s {
             "file" => Ok(Actions::File),
             "hash" => Ok(Actions::Hash),
-            "rescan" => Ok(Actions::Rescan),
-            "manifest" => Ok(Actions::Manifest),
-            _ => Err(format!("Invalid action: {}", s)),
+            "csv" => Ok(Actions::Csv),
+            _ => Err(format!(
+                "Invalid action: {}\nValid actions are: {}",
+                s,
+                Actions::variants()
+            )),
         }
     }
-}
-
-type LazyResult<T> = Result<T, Box<dyn std::error::Error>>;
-
-fn main() -> LazyResult<()> {
-    let args = CommandLineArgs::from_args();
-    let api_key = std::env::var("api_key").expect("Export the VirusTotal api key to [env] api_key");
-    let vt = VtClient::new(&api_key).user_agent("Chrome");
-
-    match args.action {
-        Actions::File => file_proc(&vt, args.file_or_hash)?,
-        Actions::Hash => hash(&vt, args.file_or_hash.first())?,
-        Actions::Rescan => rescan(&vt, args.file_or_hash.first())?,
-        Actions::Manifest => manifest(&vt, args.file_or_hash.first().unwrap())?,
-    };
-    Ok(())
-}
-
-fn hash(vt: &VtClient, hash: Option<&String>) -> VtResult<()> {
-    let res = vt.file_info(hash.unwrap())?;
-    let data = res.data.unwrap().attributes.unwrap();
-
-    println!("{:#?}", &data.last_analysis_stats.unwrap());
-    for (_s, item) in data.last_analysis_results.unwrap() {
-        if Some("malicious".to_string()) == item.category {
-            println!("{} {}", item.engine_name.unwrap(), item.result.unwrap());
-        }
-    }
-    println!("File name(s): {:?}", data.names.unwrap());
-    Ok(())
-}
-fn manifest(vt: &VtClient, manifest_file: &str) -> LazyResult<()> {
-    let manifest_csv = format!(
-        "{}.csv",
-        manifest_file
-            .split_once('.')
-            .unwrap_or(("manifest", "txt"))
-            .0
-    );
-    let mut file = File::open(manifest_file)?;
-    let csv_file = File::create(manifest_csv)?;
-    let manifest: Manifest = serde_json::from_reader(&mut file)?;
-
-    let mut wtr = csv::Writer::from_writer(csv_file);
-    for vt_data in manifest.manifest {
-        let res = vt.file_info(&vt_data.md5)?;
-        let data = res.data.unwrap().attributes.unwrap();
-        let last = data.last_analysis_stats.unwrap();
-        let record = CsvWithFileName {
-            file_name: vt_data.file,
-            md5: vt_data.md5,
-            harmless: last.harmless.unwrap_or_default(),
-            malicious: last.malicious.unwrap_or_default(),
-            suspicious: last.suspicious.unwrap_or_default(),
-            timeout: last.timeout.unwrap_or_default(),
-            type_unsupported: last.type_unsupported.unwrap_or_default(),
-            undetected: last.undetected.unwrap_or_default(),
-        };
-        wtr.serialize(&record)?;
-    }
-    wtr.flush()?;
-
-    Ok(())
-}
-
-fn rescan(vt: &VtClient, hash: Option<&String>) -> LazyResult<()> {
-    let res = vt.file_rescan(hash.unwrap())?;
-    println!("{:?}", &res.data);
-    Ok(())
 }
